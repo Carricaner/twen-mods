@@ -12,22 +12,25 @@ on:
           - patch
           - minor
           - major
+  push:
+    branches:
+      - main
+    paths:
+      - plugins/twen/.claude-plugin/plugin.json
 
 concurrency: release
 
 jobs:
-  check:
-    if: github.ref == 'refs/heads/main'
-    uses: ./.github/workflows/check.yml
-
-  release:
-    needs: check
+  prepare:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Bump the version, tag and publish
+      - name: Open a pull request for the new version
         env:
           BUMP: ${{ inputs.bump }}
           GH_TOKEN: ${{ github.token }}
@@ -43,10 +46,32 @@ jobs:
           updated="$(jq --arg version "$version" '.version = $version' "$manifest")"
           printf '%s\n' "$updated" > "$manifest"
 
-          tag="twen-v$version"
+          branch="release/twen-$version"
+          title="chore(release): twen $version"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit --all --message "chore(release): twen $version"
-          git tag --annotate "$tag" --message "Twen $version"
-          git push --atomic origin HEAD:main "$tag"
-          gh release create "$tag" --title "Twen $version" --generate-notes --verify-tag
+          git switch --create "$branch"
+          git commit --all --message "$title"
+          git push origin "$branch"
+          gh pr create --base main --head "$branch" --title "$title" --body "Merge to publish \`twen-v$version\`."
+          # Pull requests opened with this token don't start other workflows, so start the required check here.
+          gh workflow run check.yml --ref "$branch"
+
+  publish:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Publish the version if it is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="$(jq -r .version plugins/twen/.claude-plugin/plugin.json)"
+          tag="twen-v$version"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" > /dev/null; then
+            echo "$tag already exists"
+            exit 0
+          fi
+          gh release create "$tag" --target "$GITHUB_SHA" --title "Twen $version" --generate-notes
