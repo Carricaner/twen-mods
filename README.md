@@ -41,11 +41,6 @@ In the desktop app, where `/plugin` does not run: click + next to the prompt box
 
 Twen stays on the screen by itself. It reads nothing from your project, runs no programs and uses no network. It only remembers which moves you picked.
 
-## Develop
+## Contributing
 
-```sh
-node plugins/twen/test.mjs
-claude plugin validate .
-```
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) to propose a change or publish a release.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
