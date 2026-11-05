@@ -1,0 +1,9 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "twen",
+  "version": "0.9.0",
+  "description": "Twen, a smiling seal plush above the prompt: says hi, leans in Rock-eyebrow style when idle, puts both hands up on his head like a bear under stars while a turn runs",
+  "author": {
+    "name": "Carricaner"
+  }
+}

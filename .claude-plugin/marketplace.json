@@ -1,0 +1,14 @@
+{
+  "name": "twen-mods",
+  "description": "Mods maintained by Carricaner",
+  "owner": {
+    "name": "Carricaner"
+  },
+  "plugins": [
+    {
+      "name": "twen",
+      "source": "./plugins/twen",
+      "description": "Twen, a smiling seal plush above the Claude Code prompt"
+    }
+  ]
+}
