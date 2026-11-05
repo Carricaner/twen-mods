@@ -8,6 +8,11 @@ Mods maintained by [Carricaner](https://github.com/Carricaner).
 
 Herdr mods are planned. None are available yet.
 
+## Prerequisites
+
+- Claude Code (tested with 2.1.318, older versions are untested)
+- A terminal at least 40 columns wide with room for 8 rows above the prompt
+
 ## Install Twen
 
 At the prompt of a Claude Code terminal session:
@@ -36,11 +41,6 @@ In the desktop app, where `/plugin` does not run: click + next to the prompt box
 
 Twen stays on the screen by itself. It reads nothing from your project, runs no programs and uses no network. It only remembers which moves you picked.
 
-## Develop
+## Contributing
 
-```sh
-node plugins/twen/test.mjs
-claude plugin validate .
-```
-
-Bump `version` in `plugins/twen/.claude-plugin/plugin.json` with each release so installed copies see the update.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
