@@ -15,7 +15,8 @@ Mods run on the computer of everyone who installs them, so explain any new netwo
 
 ## Releasing
 
-Go to Actions, then Release, then Run workflow, and pick a bump:
+1. Go to Actions, then Release, then Run workflow, and pick a bump. This opens a pull request that only changes `version`.
+2. Merge that pull request. The tag and GitHub Release are then published automatically.
 
 | Bump | Use it for |
 | --- | --- |
