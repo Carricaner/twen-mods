@@ -8,6 +8,14 @@ Mods maintained by [Carricaner](https://github.com/Carricaner).
 
 Herdr mods are planned. None are available yet.
 
+## Prerequisites
+
+- Claude Code. Twen 0.9.1 is tested with version 2.1.318. Older versions are untested, and Claude Code has no way to declare a minimum, so update first if Twen does not appear.
+- A terminal at least 40 columns wide with room for 8 rows above the prompt. In anything smaller, Twen hides.
+- Node.js, only to run the self-check when contributing.
+
+Twen works without Herdr.
+
 ## Install Twen
 
 At the prompt of a Claude Code terminal session:

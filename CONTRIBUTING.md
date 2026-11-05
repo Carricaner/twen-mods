@@ -39,4 +39,6 @@ The workflow runs the checks, updates `version`, creates the `twen-vX.Y.Z` tag a
 | `minor` | New features that break nothing | A new move or a new option |
 | `major` | Changes that break existing use | Removing or renaming a move or command |
 
+Keep the tested Claude Code version in the README the same as the one pinned in `.github/workflows/check.yml`. It is only a tested version, not a minimum.
+
 Changes that only touch docs or the repository's own tooling need no release. People who install Twen get `main`, so keep it working at all times.
