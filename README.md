@@ -43,4 +43,4 @@ node plugins/twen/test.mjs
 claude plugin validate .
 ```
 
-Bump `version` in `plugins/twen/.claude-plugin/plugin.json` with each release so installed copies see the update.
+See [CONTRIBUTING.md](CONTRIBUTING.md) to propose a change or publish a release.
